@@ -2,7 +2,9 @@ package com.disfarse.contactapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,12 +56,16 @@ public class AddContact extends AppCompatActivity {
                 if(TextUtils.isEmpty(email1)) { etEmail.setError("Este campo não pode estar vazio");
                     return;
                 }
+
+
                 Intent returnIntend = new Intent();
                 returnIntend.putExtra("nome1", nome1);
                 returnIntend.putExtra("telefone1", telefone1);
                 returnIntend.putExtra("email1", email1);
                 returnIntend.putExtra("dataNasc1", dataNasc1);
                 setResult(RESULT_OK,returnIntend);
+
+
                 finish();
             }
         });
@@ -71,7 +78,7 @@ public class AddContact extends AppCompatActivity {
         });
 
 
-        /* ----------------------------- Start creating a date Picker to the data de nascimento to select date------------------------------------*/
+
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -93,6 +100,23 @@ public class AddContact extends AppCompatActivity {
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        /* ----------------------------- End creating a date Picker to the data de nascimento to select date------------------------------------*/
+
+    }
+
+    public void ShowAlertDialog (View v){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Are you sure?");
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "We will leave", Toast.LENGTH_LONG).show();
+            }
+        });
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "We will stay", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

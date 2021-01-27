@@ -9,8 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ContactApp">
-        <activity android:name=".Favorite"></activity>
-        <activity android:name=".AddContact" />
+        <activity android:name=".Favorite">
+            android:label = "Favorite"
+            android:parentActivityName="com.disfarse.contactapp.MainActivity.favoriteContact">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"></meta-data>
+        </activity>
+
+        <activity android:name=".AddContact">
+            android:label = "AddContact"
+            android:parentActivityName="com.disfarse.contactapp.MainActivity.favoriteContact">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"></meta-data>
+        </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
